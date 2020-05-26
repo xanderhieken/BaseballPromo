@@ -1,0 +1,43 @@
+---
+title: "Using Data to Improve a Marketing Promotion for the Los Angeles Dodgers"
+author: "Xander Hieken"
+output: html_document
+---
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+dodgers <- read.csv("data/dodgers.csv", header=TRUE)
+summary(dodgers)
+```
+
+```{r}
+dodgers$day_of_week <- as.factor(dodgers$day_of_week)
+dodgers$month <- as.factor(dodgers$month)
+dodgers$opponent <- as.factor(dodgers$opponent)
+dodgers$skies <- as.factor(dodgers$skies)
+dodgers$day_night <- as.factor(dodgers$day_night)
+dodgers$cap <- as.factor(dodgers$cap)
+dodgers$shirt <- as.factor(dodgers$shirt)
+dodgers$fireworks <- as.factor(dodgers$fireworks)
+dodgers$bobblehead <- as.factor(dodgers$bobblehead)
+```
+
+```{r}
+# creating the linear model
+linmod <- lm(attend ~ day_of_week + month + opponent + skies + day_night + cap + shirt + fireworks + bobblehead + day + temp, data = dodgers)
+summary(linmod)
+```
+
+```
+Based on the above results, bobblehead promotions have the most statistically significant impact on attendance- followed closely by the day of the week being a Tuesday.
+```
+
+
+
+
+
+
+
+
+
